@@ -13,7 +13,7 @@ const CodeEditor = ({ onRunCode }) => {
       <h2>Code Editor</h2>
       <Editor
         width="100%"
-        height="95vh"
+        height="70vh"
         defaultLanguage="python"
         defaultValue={code}
         theme="vs-dark"

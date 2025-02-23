@@ -10,9 +10,16 @@ const MessageInput = ({ onMessageSent }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/generate", {
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Content-Type": "application/json"
+        }
+      };
+      const response = await axios.post("http://127.0.0.1:3000/generate", {
         query: message,
-      });
+      }, config);
 
       onMessageSent(response.data.response); // Send response to parent component
     } catch (error) {

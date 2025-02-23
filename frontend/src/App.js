@@ -12,9 +12,16 @@ const App = () => {
 
   const handleRunCode = async (code) => {
     try {
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+          "Content-Type": "application/json"
+        }
+      };
       const response = await axios.post("http://127.0.0.1:5000/generate", {
         query: code,
-      });
+      }, config);
       setAiResponse(response.data.response);
     } catch (error) {
       setAiResponse("Error fetching response from AI.");
@@ -31,7 +38,7 @@ const App = () => {
         <CodeEditor onRunCode={handleRunCode} />
         <ResponseBoard response={aiResponse} />
       </div>
-      <MessageInput />
+      <MessageInput onMessageSent={setAiResponse} />
       <Footer />
     </div>
   );
